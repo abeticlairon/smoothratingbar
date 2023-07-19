@@ -9,21 +9,20 @@ class SmoothStarRating extends StatelessWidget {
   final int starCount;
   final double rating;
   final RatingChangeCallback onRatingChanged;
-  final Color color;
-  final Color borderColor;
+  final Color? color;
+  final Color? borderColor;
   final double size;
   final bool allowHalfRating;
-  final IconData filledIconData;
-  final IconData halfFilledIconData;
-  final IconData
-      defaultIconData; //this is needed only when having fullRatedIconData && halfRatedIconData
+  final IconData? filledIconData;
+  final IconData? halfFilledIconData;
+  final IconData? defaultIconData; //this is needed only when having fullRatedIconData && halfRatedIconData
   final double spacing;
   SmoothStarRating({
     this.starCount = 5,
     this.spacing=0.0,
     this.rating = 0.0,
     this.defaultIconData,
-    this.onRatingChanged,
+    required this.onRatingChanged,
     this.color,
     this.borderColor,
     this.size = 25,
@@ -62,7 +61,7 @@ class SmoothStarRating extends StatelessWidget {
         if (this.onRatingChanged != null) onRatingChanged(index + 1.0);
       },
       onHorizontalDragUpdate: (dragDetails) {
-        RenderBox box = context.findRenderObject();
+        RenderBox box = context.findRenderObject() as RenderBox;
         var _pos = box.globalToLocal(dragDetails.globalPosition);
         var i = _pos.dx / size;
         var newRating = allowHalfRating ? i : i.round().toDouble();
